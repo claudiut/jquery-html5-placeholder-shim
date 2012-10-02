@@ -43,6 +43,10 @@
         var possible_line_height = {};
         if( !$this.is('textarea') && $this.css('height') != 'auto') {
           possible_line_height = { lineHeight: $this.css('height'), whiteSpace: 'nowrap' };
+
+        if($this.parent().css('position') != 'absolute' && $this.parent().css('position') != 'fixed')
+          $this.parent().css('position', 'relative');
+
         }
 
         var ol = $('<label />')
@@ -79,11 +83,6 @@
           }).blur(function() {
             ol[$this.val().length ? 'hide' : 'show']();
           }).triggerHandler('blur');
-        $(window)
-          .resize(function() {
-            var $target = ol.data('target')
-            ol.css(calcPositionCss($target))
-          });
       });
     }
   });
